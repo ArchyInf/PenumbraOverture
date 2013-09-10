@@ -52,19 +52,24 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>..\HPL1Engine\include;..\dependencies\include;..\OALWrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm118 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <OutputFile>Penumbra.exe</OutputFile>
+      <AdditionalDependencies>fltk.lib;wsock32.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../redist/Penumbra.exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)Penumbra.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>..\dependencies\lib\win32;..\HPL1Engine\lib;..\OALWrapper\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,9 +80,11 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>-Zm118 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>HPL.lib;OALWrapper.lib;fltk.lib;wsock32.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fltk.lib;wsock32.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../redist/Penumbra.exe</OutputFile>
       <AdditionalLibraryDirectories>..\dependencies\lib\win32;..\HPL1Engine\lib;..\OALWrapper\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreEmbeddedIDL>false</IgnoreEmbeddedIDL>
@@ -147,7 +154,9 @@
     <ClCompile Include="RadioHandler.cpp" />
     <ClCompile Include="SaveHandler.cpp" />
     <ClCompile Include="SaveTypes.cpp" />
-    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="TriggerHandler.cpp" />
     <ClCompile Include="Triggers.cpp" />
   </ItemGroup>
@@ -214,6 +223,24 @@
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="TriggerHandler.h" />
     <ClInclude Include="Triggers.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HPL1Engine\HPL.vcxproj">
+      <Project>{0780dec5-a930-4721-9364-17a49d2a4e60}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\OALWrapper\OALWrapper.vcxproj">
+      <Project>{6f50ed2a-585c-4b70-a595-69e149364a8e}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

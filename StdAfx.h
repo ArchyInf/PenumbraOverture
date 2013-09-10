@@ -20,6 +20,7 @@
 #define GAME_STDAFX_H
 
 #include <hpl.h>
+#include <functional>
 
 #endif // GAME_STDAFX_H
 
