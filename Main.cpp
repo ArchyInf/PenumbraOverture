@@ -30,6 +30,12 @@ int hplMain(const tString& asCommandLine)
 {
 	cInit *pInit = hplNew( cInit, () );
 
+#ifdef WIN32
+	//CHAR module[FILENAME_MAX];
+	//GetModuleFileName( NULL, module, sizeof( module ) );
+	SetCurrentDirectory("../../resources/overture/");
+#endif
+
 	bool bRet = pInit->Init(asCommandLine);
 	
 	if(bRet==false){
